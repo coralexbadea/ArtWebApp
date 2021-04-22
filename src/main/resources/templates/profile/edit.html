@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Edit Performance</title>
+</head>
+<body>
+<div align="center">
+    <h1>Edit laboratory</h1>
+    <br />
+    <form th:action="@{/profile/edit}" th:object="${profile}"
+          method="post">
+        <table border="0">
+
+            <tr>
+                <td> <input type="hidden"  th:field="*{pid}"> <label
+                        th:if="${#fields.hasErrors('pid')}" th:errors="*{pid}"></label>
+            </tr>
+
+
+            <tr>
+                <td><input type="text" th:field="*{fullName}" placeholder="Name"> <label
+                        th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></label></td>
+            </tr>
+
+            <tr>
+                <td> <input type="text" th:field="*{age}" placeholder="Age"> <label
+                        th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{favouriteArtist}" placeholder="Favourite Artist"> <label
+                        th:if="${#fields.hasErrors('favouriteArtist')}" th:errors="*{favouriteArtist}"></label></td>
+            </tr>
+
+
+            <tr>
+                <span utext="Favourite Style: "> </span>
+                <select th:field="*{favouriteSyle}">
+                    <option th:each="state : ${T(com.example.artapp.domain.Style).values()}"
+                            th:value="${state}"
+                            th:text="${state}">
+                    </option>
+                </select>
+            </tr>
+
+
+            <tr>
+                <td colspan="2"><button type="submit">Save</button></td>
+            </tr>
+        </table>
+
+    </form>
+
+</div>
+</body>
+</html>

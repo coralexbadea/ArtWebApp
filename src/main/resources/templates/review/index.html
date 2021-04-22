@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews Information</title>
+</head>
+<body>
+<div align="center">
+
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+
+
+    <table border="1" cellpadding="10">
+        <h2>List of reviews</h2>
+        <thead>
+        <tr>
+            <th>UserName</th>
+            <th>Review</th>
+            <th>Comment</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review : ${reviews}">
+            <td th:text="${review.user?.userName}">UserName</td>
+            <td th:text="${review.reviewStar}">Review</td>
+            <td th:text="${review.comment}">Comment</td>
+
+
+<!--            <td th:if(${permitted}})>-->
+<!--                <a th:href="@{'/review/edit/'+${review.rid}}">Edit</a>-->
+<!--            </td>-->
+
+            <td th:if="${permitted}"}>
+                <a th:href="@{'/review/delete/'+${id}+'/'+${review.rid}}">Delete</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

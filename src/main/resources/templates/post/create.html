@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>post Form</title>
+</head>
+<body>
+
+<form th:action="@{/post/create}"
+      th:object="${post}" method="post"
+      role="form"
+   enctype="multipart/form-data">
+    <h2>post Form</h2>
+    <table border="0" cellpadding="10">
+
+
+        <tr>
+            <td><input type="text" th:field="*{ptitle}" placeholder="post Title"> </td>
+        </tr>
+
+        <tr>
+            <td> <input type="text" th:field="*{pauthor}" placeholder="Painter"> </td>
+        </tr>
+
+        <tr>
+            <td>  <textarea rows="4" cols="50" th:field="*{pdescription}" placeholder="Description"> </textarea></td>
+        </tr>
+
+
+        <tr>
+
+            Upload an image:
+          <input type="file" class="custom-file-input" name="image" value="Upload" style="padding-bottom: 5px"/>
+
+        </tr>
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+        <tr>
+            Upload model:
+            <input type="file" class="custom-file-input" name="model" value="Upload" style="padding-bottom: 5px"/>
+        </tr></div>
+
+        <tr>
+            <td><button type="submit">Create post</button></td>
+        </tr>
+
+        <div th:if="${message}">
+            <h2 th:text="${message}"/>
+        </div>
+
+    </table>
+
+</form>
+<form th:action="@{'/index'}" method="get">
+    <button type="Submit">Back to HomePage</button>
+</form>
+
+
+
+
+</body>
+</html>
+

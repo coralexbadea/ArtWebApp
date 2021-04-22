@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>profiles Information</title>
+</head>
+<body>
+    <div align="center">
+
+
+        <div sec:authorize="isAuthenticated()">
+            Welcome <b><span sec:authentication="name">Username</span></b>
+        </div>
+        <form th:action="@{'/index'}" method="get">
+            <button type="Submit">Back to HomePage</button>
+        </form>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+
+
+        <table border="1" cellpadding="10">
+            <h2>List of profiles</h2>
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Full name</th>
+                    <th>Age</th>
+                    <th>Favourite Artist</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="profile : ${profiles}">
+                    <td th:text="${profile.user?.userName}">UserName</td>
+                    <td th:text="${profile.fullName}">Full name</td>
+                    <td th:text="${profile.age}">age</td>
+                    <td th:text="${profile.favouriteArtist}">Favourite Artist</td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{'/profile/delete/'+${profile.pid}}">Delete</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

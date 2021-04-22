@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org",
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>View post</title>
+</head>
+<body>
+<form th:action="@{'/index'}" method="get">
+    <button type="Submit">Back to HomePage</button>
+</form>
+<table   th:object="${post}" border="0" cellpadding="10">
+
+    <tr>
+        <td> <h1><span th:utext="*{ptitle}"></span></h1>
+    </tr>
+
+    <tr>
+        <td> <h3><span th:utext="'Average Review: '+${averageStars}+ ' Stars'"></span></h3>
+    </tr>
+
+
+
+    <div>
+        <a th:href="@{'/post/delete/'+${post.pid}}">Delete</a>
+    </div>
+
+    <tr>
+        <td >
+            <img th:src="@{'http://127.0.0.1:8080/painting/personal/'+${post.pid}+'/'+${post.imagePath}}" width="550"/>
+
+        </td>
+    </tr>
+
+
+    <tr>
+        <td> <span th:utext="*{pdescription}"></span>
+    </tr>
+
+    <div>
+        <a th:href="@{'/review/create/'+${post.pid}}">Add Review</a>
+    </div>
+
+    <div>
+        <a th:href="@{'/review/index/'+${post.pid}}">View Reviews</a>
+    </div>
+
+
+</table>
+
+</body>
+</html>

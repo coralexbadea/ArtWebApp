@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml"
+      xmlns:height="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Review Form</title>
+</head>
+<body>
+
+<form th:action="@{'/review/create' + '/'+${pid}}"
+      th:object="${review}" method="post"
+      role="form">
+    <h2>Review Form</h2>
+    <table border="0" cellpadding="10">
+
+        <tr>
+            <select th:field="*{reviewStar}">
+                <option th:each="state : ${T(com.example.artapp.domain.ReviewStar).values()}"
+                        th:value="${state}"
+                        th:text="${state}">
+                </option>
+            </select>
+        </tr>
+
+        <tr>
+            <td>  <textarea rows="4" cols="50" th:field="*{comment}" placeholder="Comment"> </textarea><label
+                    th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></label></td>
+        </tr>
+
+        <tr>
+            <td><button type="submit">Add Review</button></td>
+        </tr>
+    </table>
+
+</form>
+
+
+
+
+</body>
+</html>

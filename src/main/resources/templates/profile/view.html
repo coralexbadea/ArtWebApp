@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>View profile</title>
+</head>
+<body>
+
+
+<table   th:object="${profile}" border="0" cellpadding="10">
+    <tr>
+        <td th:text="${profile.fullName!=null}?'':'Your profile is not set up yet, please press Edit to have it ready.'"></td>
+    </tr>
+    <tr >
+        <a th:href="@{'/profile/edit/'+${profile.pid}}">Edit</a>
+    </tr>
+    <tr>
+        <td> <h1><span th:utext="'Full Name: '+*{fullName}"></span></h1>
+    </tr>
+    <tr>
+        <td> <span th:utext="'Age '+*{age}"> </span>
+    </tr>
+    <tr>
+        <td> <span th:utext="'Favourite Artist: '+*{favouriteArtist}"></span>
+    </tr>
+
+    <tr>
+        <td> <span th:utext="'Favourite Style: '+*{favouriteSyle}"></span>
+    </tr>
+
+
+    <tr sec:authorize="hasAnyAuthority('ADMIN','ARTIST')">
+        <form th:action="@{'/post/index/'+ ${profile.pid}}" method="get">
+            <button type="Submit">View all posts</button>
+        </form>
+    </tr>
+
+
+    <form th:action="@{'/index'}" method="get">
+        <button type="Submit">Back to HomePage</button>
+    </form>
+
+    <div sec:authorize="hasAnyAuthority('ARTIST')">
+        <a href="/post/createPersonal">Add Post</a>
+    </div>
+
+</table>
+
+</body>
+</html>

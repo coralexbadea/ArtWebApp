@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratories Information</title>
+</head>
+<body>
+    <div align="center">
+
+
+        <div sec:authorize="isAuthenticated()">
+            Welcome <b><span sec:authentication="name">Username</span></b>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <a href="/post/create">Add Post</a>
+        </div>
+
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <a href="/profile/index">View Artists</a>
+        </div>
+        <div sec:authorize="hasAnyAuthority('ARTIST')">
+            <a href="/profile/view">View Profile</a>
+        </div>
+
+        <div sec:authorize="hasAnyAuthority('ARTIST')">
+            <a href="/profile/explore">Explore</a>
+        </div>
+
+        <table border="0" cellpadding="10">
+
+            <thead>
+
+            </thead>
+            <tbody>
+                <tr th:each="post : ${posts}">
+
+
+                    <td >
+                        <a th:href="@{'post/view/'+${post.pid}}">
+                            <img th:src="@{'http://127.0.0.1:8080/painting/files/'+${post.imagePath}}" width="350"/>
+
+
+                        </a>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
