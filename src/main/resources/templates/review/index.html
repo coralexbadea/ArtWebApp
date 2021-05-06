@@ -34,6 +34,11 @@
         </tr>
         </thead>
         <tbody>
+
+        <form th:action="@{'/index'}" method="get">
+            <button type="Submit">Back to HomePage</button>
+        </form>
+
         <tr th:each="review : ${reviews}">
             <td th:text="${review.user?.userName}">UserName</td>
             <td th:text="${review.reviewStar}">Review</td>
@@ -44,7 +49,8 @@
 <!--                <a th:href="@{'/review/edit/'+${review.rid}}">Edit</a>-->
 <!--            </td>-->
 
-            <td th:if="${permitted}"}>
+<!--            <td th:if="${permitted}"}>-->
+            <td sec:authorize="hasAnyAuthority('ADMIN')">
                 <a th:href="@{'/review/delete/'+${id}+'/'+${review.rid}}">Delete</a>
             </td>
 

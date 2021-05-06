@@ -20,11 +20,6 @@
     </tr>
 
 
-
-    <div>
-        <a th:href="@{'/post/delete/'+${post.pid}}">Delete</a>
-    </div>
-
     <tr>
         <td >
             <img th:src="@{'http://127.0.0.1:8080/painting/personal/'+${post.pid}+'/'+${post.imagePath}}" width="550"/>
@@ -43,6 +38,10 @@
 
     <div>
         <a th:href="@{'/review/index/'+${post.pid}}">View Reviews</a>
+    </div>
+
+    <div>
+        <a th:href="@{'/post/delete/'+${post.pid}}">Delete</a>
     </div>
 
 

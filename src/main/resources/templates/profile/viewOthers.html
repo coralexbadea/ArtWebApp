@@ -12,7 +12,9 @@
     <tr>
         <td th:text="${profile.fullName!=null}?'':'This profile is not setup yet.'"></td>
     </tr>
-
+    <tr sec:authorize="hasAnyAuthority('ADMIN')">
+        <a th:href="@{'/profile/edit/'+${profile.pid}}">Edit</a>
+    </tr>
     <tr>
         <td> <h1><span th:utext="'Full Name: '+*{fullName}"></span></h1>
     </tr>
@@ -33,6 +35,7 @@
             <button type="Submit">View all posts</button>
         </form>
     </tr>
+
 
 
     <form th:action="@{'/index'}" method="get">

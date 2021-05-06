@@ -53,6 +53,7 @@ public class ProfileController {
         return modelAndView;
     }
 
+
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable(name = "id") Long id) {
         ModelAndView modelAndVie = new ModelAndView("profile/edit");
@@ -60,15 +61,15 @@ public class ProfileController {
         return modelAndVie;
     }
     
-    @PostMapping(value = "/edit")
-    public String edit(@ModelAttribute("profile") Profile profile) {
+    @PostMapping(value = "/edit/{id}")
+    public String edit(@PathVariable(name = "id") Long id, @ModelAttribute("profile") Profile profile) {
         profileService.saveEdit(profile);
-        return "redirect:/profile/view";
+        return "redirect:/profile/edit/"+id;
     }
 
-    @RequestMapping("/delete/{sid}")
-    public String deletelaboratory(@PathVariable (name="sid") Long sid) {
-        profileService.delete(sid);
+    @RequestMapping("/delete/{pid}")
+    public String deleteProfile(@PathVariable (name="pid") Long pid) {
+        profileService.delete(pid);
         return "redirect:/profile/index";
     }
 }

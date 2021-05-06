@@ -33,6 +33,11 @@
         <td> <span th:utext="*{pdescription}"></span>
     </tr>
 
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+        <a th:href="@{'/post/delete/'+${post.pid}}">Delete</a>
+    </div>
+
+
     <div>
         <a th:href="@{'/review/create/'+${post.pid}}">Add Review</a>
     </div>
@@ -40,6 +45,7 @@
     <div>
         <a th:href="@{'/review/index/'+${post.pid}}">View Reviews</a>
     </div>
+
 
 
 

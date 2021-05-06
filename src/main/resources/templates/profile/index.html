@@ -39,6 +39,9 @@
                     <td th:text="${profile.age}">age</td>
                     <td th:text="${profile.favouriteArtist}">Favourite Artist</td>
                     <td sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{'/profile/view/'+${profile.pid}}">View</a>
+                    </td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{'/profile/delete/'+${profile.pid}}">Delete</a>
                     </td>
 

@@ -13,6 +13,11 @@ public class StorageProperties {
 	private String location = "upload";
 	private String loadLocation = "results";
 	private String modelLocation = "models";
+	private String logLocation = "logs/log.txt";
+
+	public String getLogLocation() {
+		return logLocation;
+	}
 
 	public String getLocation() {
 		return location;

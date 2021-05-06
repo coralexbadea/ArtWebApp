@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>post Form</title>
+</head>
+<body>
+
+<form th:action="@{'/post/edit/'+ ${post.pid}}"
+      th:object="${post}" method="post"
+      role="form"
+      enctype="multipart/form-data">
+    <h2>post Form</h2>
+    <table border="0" cellpadding="10">
+
+        <tr>
+            <td> <input type="hidden"  th:field="*{pid}"></td>
+        </tr>
+
+        <tr>
+            <td><input type="text" th:field="*{ptitle}" placeholder="post Title"> </td>
+        </tr>
+
+        <tr>
+            <td> <input type="text" th:field="*{pauthor}" placeholder="Painter"> </td>
+        </tr>
+
+        <tr>
+            <td>  <textarea rows="4" cols="50" th:field="*{pdescription}" placeholder="Description"> </textarea></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2"><button type="submit">Save</button></td>
+        </tr>
+
+
+    </table>
+
+</form>
+<form th:action="@{'/index'}" method="get">
+    <button type="Submit">Back to HomePage</button>
+</form>
+
+
+
+
+</body>
+</html>
+

@@ -24,12 +24,8 @@ public class ReviewController {
     @GetMapping(value = "/index/{id}")
     public ModelAndView getreviews(@PathVariable(name = "id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Review> reviews = reviewService.listAllByPostId(id);
-        modelAndView.addObject("reviews", reviews);
+        modelAndView.addObject("reviews", reviewService.listAllByPostId(id));
         modelAndView.addObject("id", id);
-        Boolean permitted = reviewService.getPermitted(id);
-        modelAndView.addObject("permitted", permitted);
-
         modelAndView.setViewName("review/index");
         return modelAndView;
     }
@@ -44,8 +40,7 @@ public class ReviewController {
     @GetMapping(value = "/create/{id}")
     public ModelAndView newReview(@PathVariable(name="id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
-        Review review = new Review();
-        modelAndView.addObject("review", review);
+        modelAndView.addObject("review", new Review());
         modelAndView.addObject( "pid", id);
         modelAndView.setViewName("/review/create");
         return modelAndView;

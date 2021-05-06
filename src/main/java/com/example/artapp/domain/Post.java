@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="posts")
-public class Post {
+public class Post extends Object{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pid;
@@ -97,4 +97,6 @@ public class Post {
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
+
+
 }

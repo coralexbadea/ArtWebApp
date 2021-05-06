@@ -1,12 +1,6 @@
 package com.example.artapp.service.storage;
 
-import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.example.artapp.service.storage.StorageException;

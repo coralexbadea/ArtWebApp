@@ -8,7 +8,7 @@
 <div align="center">
     <h1>Edit laboratory</h1>
     <br />
-    <form th:action="@{/profile/edit}" th:object="${profile}"
+    <form th:action="@{'/profile/edit/'+${profile.pid}}" th:object="${profile}"
           method="post">
         <table border="0">
 

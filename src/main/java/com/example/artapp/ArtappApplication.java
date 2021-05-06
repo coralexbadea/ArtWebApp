@@ -1,5 +1,8 @@
 package com.example.artapp;
 
+import com.example.artapp.service.notification.EmailObserver;
+import com.example.artapp.service.notification.LogObserver;
+import com.example.artapp.service.notification.MainPostSubject;
 import com.example.artapp.service.storage.StorageProperties;
 import com.example.artapp.service.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
@@ -17,10 +20,16 @@ public class ArtappApplication {
     }
 
     @Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(StorageService storageService,
+                           MainPostSubject mainPostSubject,
+                           EmailObserver emailObserver,
+                           LogObserver logObserver
+                           ) {
         return (args) -> {
-            storageService.deleteAll();
+            //storageService.deleteAll();
             storageService.init();
+            emailObserver.setSubject(mainPostSubject);
+            logObserver.setSubject(mainPostSubject);
         };
     }
 

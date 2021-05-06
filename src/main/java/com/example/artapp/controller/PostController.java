@@ -1,7 +1,6 @@
 package com.example.artapp.controller;
 
 import com.example.artapp.domain.Post;
-import com.example.artapp.domain.User;
 import com.example.artapp.service.PostService;
 import com.example.artapp.service.UserService;
 import com.example.artapp.service.storage.StorageFileNotFoundException;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 ;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +24,7 @@ public class PostController {
     PostService postService;
     @Autowired
     UserService userService;
+
     @GetMapping(value = "/view/{pid}")
     public ModelAndView viewpost(@PathVariable(name = "pid") Long pid){
         ModelAndView modelAndView = new ModelAndView();
@@ -38,22 +37,23 @@ public class PostController {
     @GetMapping(value = "/viewPersonal/{pid}")
     public ModelAndView viewpostPersonal(@PathVariable(name = "pid") Long pid){
         ModelAndView modelAndView = new ModelAndView();
-        Post post = postService.findById(pid);
-        modelAndView.addObject(post);
-        User user = userService.getUserByPost(post);
-        User currentUser = userService.getCurrentUser();
-        float averageStars = postService.computeAverageStars(pid);
-        modelAndView.addObject("averageStars", averageStars);
-        if(user == currentUser){
-            modelAndView.setViewName("post/viewPersonal");
-        }
-        else {
-            modelAndView.setViewName("post/viewOthers");
-        }
-
+        postService.handleViewpostPersonal(modelAndView, pid);
         return modelAndView;
     }
 
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable(name = "id") Long id) {
+        ModelAndView modelAndVie = new ModelAndView("post/edit");
+        Post post = postService.findById(id);
+        modelAndVie.addObject("post", post);
+        return modelAndVie;
+    }
+
+    @PostMapping(value = "/edit/{pid}")
+    public String edit(@PathVariable(name = "pid") Long pid, @ModelAttribute("post") Post post) {
+        postService.saveEdit(post);
+        return "redirect:/post/view/"+pid;
+    }
 
 
     @GetMapping(value = "/index/{pid}")
@@ -85,8 +85,7 @@ public class PostController {
     public String createpost(@ModelAttribute Post post,
                                 @ModelAttribute MultipartFile image,
                                 @ModelAttribute MultipartFile model,
-                                        RedirectAttributes redirectAttributes,
-                                        BindingResult bindingResult){
+                                        RedirectAttributes redirectAttributes){
 
        String result = postService.createPostCreate( post, image, model, redirectAttributes);
        return result;
@@ -96,8 +95,7 @@ public class PostController {
     public String createpostPersonal(
                             @ModelAttribute Post post,
                              @ModelAttribute MultipartFile image,
-                             RedirectAttributes redirectAttributes,
-                             BindingResult bindingResult){
+                             RedirectAttributes redirectAttributes){
 
         String result = postService.createPostPersonalCreate(post, image, redirectAttributes);
         return result;

@@ -1,6 +1,8 @@
 package com.example.artapp.repository;
 
+import com.example.artapp.domain.Post;
 import com.example.artapp.domain.Review;
+import com.example.artapp.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +16,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Modifying
     @Query("delete from Review r where r.rid=:id")
     void deleteById(@Param("id") Long id);
+
+    Review findByPostAndUser(Post post, User user);
 }

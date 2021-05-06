@@ -30,16 +30,13 @@
     </tr>
 
 
-    <tr sec:authorize="hasAnyAuthority('ADMIN','ARTIST')">
+    <tr sec:authorize="hasAnyAuthority('ARTIST')">
         <form th:action="@{'/post/index/'+ ${profile.pid}}" method="get">
             <button type="Submit">View all posts</button>
         </form>
     </tr>
 
 
-    <form th:action="@{'/index'}" method="get">
-        <button type="Submit">Back to HomePage</button>
-    </form>
 
     <div sec:authorize="hasAnyAuthority('ARTIST')">
         <a href="/post/createPersonal">Add Post</a>

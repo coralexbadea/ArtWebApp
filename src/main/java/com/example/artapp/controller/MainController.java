@@ -1,7 +1,6 @@
 package com.example.artapp.controller;
 
 
-import com.example.artapp.domain.Post;
 import com.example.artapp.domain.User;
 
 import com.example.artapp.service.PostService;
@@ -19,12 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -43,7 +38,6 @@ public class MainController {
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("posts", postService.getAdminPosts());
-        storageService.initPersonalFolder(userService.getCurrentUser().getUserId());
         modelAndView.setViewName("index");
         return modelAndView;
     }

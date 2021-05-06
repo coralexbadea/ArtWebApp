@@ -38,4 +38,6 @@ public interface StorageService {
     void deleteFile(String imagePath, String modelPath);
 
 	void deleteFile(String imagePath, Long pid);
+
+    void writeToLog(String ptitle) ;
 }
