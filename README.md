@@ -1,5 +1,5 @@
 # ArtWebApp
-### A Spring MVC website, destined to art passionated that allow users to perfom Style Transfer using Neural Networks.
+#### A Spring MVC website, destined to art passionated that allow users to perfom Style Transfer using Neural Networks.
 
 Recent advancements in image processing field has produced results in almost
 every field, including art, which has been viewed as a pantheon of humanity. Papers
